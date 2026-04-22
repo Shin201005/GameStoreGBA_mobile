@@ -113,19 +113,19 @@ class OnboardingPage extends StatelessWidget {
               _featureItem(
                 Icons.login,
                 'Đăng nhập nhanh',
-                'Tài khoản local đơn giản cho bản demo.',
+                'Tạo tài khoản local, đăng nhập nhanh chóng mà không cần mạng.',
               ),
               const SizedBox(height: 12),
               _featureItem(
                 Icons.favorite,
                 'Lưu game yêu thích',
-                'Sẵn khung cho library và favorites ở tuần sau.',
+                'Lưu lại game bạn thích để dễ dàng tìm lại sau này.',
               ),
               const SizedBox(height: 12),
               _featureItem(
                 Icons.gamepad,
-                'Sẵn luồng Play Game',
-                'Chuẩn bị sẵn cho phần EmulatorJS tuần 2.',
+                'Chơi bằng Emulator',
+                'Cung cấp nền tảng để tích hợp emulator và chơi game GBA GB GBC ngay trong app.',
               ),
               const Spacer(),
               AppButton(
