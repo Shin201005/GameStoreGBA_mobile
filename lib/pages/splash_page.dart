@@ -13,8 +13,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final AuthService _authService = AuthService();
-
   @override
   void initState() {
     super.initState();
@@ -24,30 +22,12 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _handleStart() async {
     await Future.delayed(const Duration(seconds: 2));
 
-    final hasSeenOnboarding = await _authService.hasSeenOnboarding();
-    final isLoggedIn = await _authService.isLoggedIn();
-
     if (!mounted) return;
 
-    if (!hasSeenOnboarding) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const OnboardingPage()),
-      );
-      return;
-    }
-
-    if (isLoggedIn) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const MainPage()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const LoginPage()),
-      );
-    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const OnboardingPage()),
+    );
   }
 
   @override

@@ -3,19 +3,22 @@ import '../main.dart';
 import '../services/auth_service.dart';
 import '../widgets/app_button.dart';
 import 'login_page.dart';
+import 'main_page.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
 
   Future<void> _start(BuildContext context) async {
     final authService = AuthService();
-    await authService.setHasSeenOnboarding(true);
+    final isLoggedIn = await authService.isLoggedIn();
 
     if (!context.mounted) return;
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const LoginPage()),
+      MaterialPageRoute(
+        builder: (_) => isLoggedIn ? const MainPage() : const LoginPage(),
+      ),
     );
   }
 
