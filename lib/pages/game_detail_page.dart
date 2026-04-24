@@ -45,15 +45,19 @@ class _GameDetailPageState extends State<GameDetailPage> {
     });
   }
 
-  void _addToLibrary() async {
-    await _libraryService.addToLibrary(widget.game.id);
+  void _toggleLibrary() async {
+    await _libraryService.toggleLibrary(widget.game.id);
     _loadLibrary();
 
     if (!mounted) return;
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Đã thêm vào thư viện')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          _isInLibrary ? 'Đã xóa khỏi thư viện' : 'Đã thêm vào thư viện',
+        ),
+      ),
+    );
   }
 
   @override
@@ -162,7 +166,7 @@ class _GameDetailPageState extends State<GameDetailPage> {
               children: [
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: _isInLibrary ? null : _addToLibrary,
+                    onPressed: _toggleLibrary,
                     icon: Icon(_isInLibrary ? Icons.check : Icons.library_add),
                     label: Text(_isInLibrary ? 'Đã thêm' : 'Library'),
                     style: OutlinedButton.styleFrom(

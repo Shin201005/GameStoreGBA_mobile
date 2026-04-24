@@ -28,4 +28,26 @@ class LibraryService {
     final list = await getLibraryGames();
     return list.contains(gameId);
   }
+
+  Future<void> removeFromLibrary(int gameId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final list = await getLibraryGames();
+
+    list.remove(gameId);
+
+    await prefs.setString(_key, jsonEncode(list));
+  }
+
+  Future<void> toggleLibrary(int gameId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final list = await getLibraryGames();
+
+    if (list.contains(gameId)) {
+      list.remove(gameId);
+    } else {
+      list.add(gameId);
+    }
+
+    await prefs.setString(_key, jsonEncode(list));
+  }
 }
