@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
 import '../models/game_model.dart';
+import 'play_game_page.dart';
 
 class GameDetailPage extends StatelessWidget {
   final GameModel game;
@@ -82,7 +83,13 @@ class GameDetailPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () {
-                  // Bước sau: mở PlayGamePage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          PlayGamePage(title: game.title, rom: game.rom),
+                    ),
+                  );
                 },
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Play'),

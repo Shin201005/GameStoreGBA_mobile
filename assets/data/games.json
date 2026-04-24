@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "title": "Pokemon Fire Red",
-    "rom": "pokemon_fire_red.gba",
+    "title": "Pokemon Leaf Green",
+    "rom": "PokemonLG.gba",
     "category": "GBA",
     "cover": "assets/covers/pokemon_fire_red.png",
     "description": "Game nhập vai Pokemon kinh điển trên hệ máy GBA.",
