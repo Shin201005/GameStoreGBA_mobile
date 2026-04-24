@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Pokemon Fire Red",
+    "rom": "pokemon_fire_red.gba",
+    "category": "GBA",
+    "cover": "assets/covers/pokemon_fire_red.png",
+    "description": "Game nhập vai Pokemon kinh điển trên hệ máy GBA.",
+    "rating": 4.8
+  },
+  {
+    "id": 2,
+    "title": "Pokemon Emerald",
+    "rom": "pokemon_emerald.gba",
+    "category": "GBA",
+    "cover": "assets/covers/pokemon_emerald.png",
+    "description": "Phiên bản Pokemon nổi tiếng với vùng đất Hoenn.",
+    "rating": 4.7
+  },
+  {
+    "id": 3,
+    "title": "Dragon Ball Legacy of Goku",
+    "rom": "dragon_ball.gba",
+    "category": "Action",
+    "cover": "assets/covers/dragon_ball.png",
+    "description": "Game hành động phiêu lưu theo Dragon Ball.",
+    "rating": 4.5
+  }
+]
