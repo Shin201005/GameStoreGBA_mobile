@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/game_model.dart';
 import '../services/game_service.dart';
 import '../services/library_service.dart';
+import '../theme/app_theme.dart';
 import '../widgets/empty_state_widget.dart';
 import '../widgets/game_card.dart';
 import 'game_detail_page.dart';
@@ -34,6 +35,8 @@ class _LibraryPageState extends State<LibraryPage> {
       return libraryIds.contains(game.id);
     }).toList();
 
+    if (!mounted) return;
+
     setState(() {
       _libraryGames = games;
       _isLoading = false;
@@ -42,10 +45,12 @@ class _LibraryPageState extends State<LibraryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Library')),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator(color: colors.accent))
           : _libraryGames.isEmpty
           ? const EmptyStateWidget(message: 'Thư viện đang trống')
           : GridView.builder(
@@ -55,7 +60,7 @@ class _LibraryPageState extends State<LibraryPage> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
-                childAspectRatio: 0.72,
+                childAspectRatio: 0.68,
               ),
               itemBuilder: (context, index) {
                 final game = _libraryGames[index];

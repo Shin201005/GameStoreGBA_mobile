@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
-import '../services/auth_service.dart';
-import 'login_page.dart';
-import 'main_page.dart';
+import '../theme/app_theme.dart';
 import 'onboarding_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -32,44 +29,42 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF0B0B12), Color(0xFF171726), Color(0xFF0B0B12)],
+            colors: [colors.bg, colors.bgSoft, colors.bg],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
               radius: 44,
-              backgroundColor: AppColors.card,
-              child: Icon(
-                Icons.sports_esports,
-                size: 42,
-                color: AppColors.accent,
-              ),
+              backgroundColor: colors.card,
+              child: Icon(Icons.sports_esports, size: 42, color: colors.accent),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'GameStore Mobile',
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w800,
-                color: AppColors.text,
+                color: colors.text,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Play • Save • Favorite',
-              style: TextStyle(fontSize: 14, color: AppColors.textSoft),
+              style: TextStyle(fontSize: 14, color: colors.textSoft),
             ),
-            SizedBox(height: 28),
-            CircularProgressIndicator(color: AppColors.accent),
+            const SizedBox(height: 28),
+            CircularProgressIndicator(color: colors.accent),
           ],
         ),
       ),

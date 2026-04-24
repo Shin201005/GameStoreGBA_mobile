@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../services/auth_service.dart';
+import '../theme/app_theme.dart';
 import '../widgets/app_button.dart';
 import '../widgets/app_text_field.dart';
 import 'main_page.dart';
@@ -48,12 +48,37 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _showMessage(String msg) {
+    final colors = context.colors;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(msg),
-        backgroundColor: AppColors.card2,
+        backgroundColor: colors.card2,
         behavior: SnackBarBehavior.floating,
       ),
+    );
+  }
+
+  Widget _header(BuildContext context) {
+    final colors = context.colors;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Đăng nhập',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w800,
+            color: colors.text,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Chào mừng quay lại với GameStore Mobile',
+          style: TextStyle(fontSize: 14, color: colors.textSoft),
+        ),
+      ],
     );
   }
 
@@ -64,29 +89,10 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  Widget _header() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        Text(
-          'Đăng nhập',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w800,
-            color: AppColors.text,
-          ),
-        ),
-        SizedBox(height: 8),
-        Text(
-          'Chào mừng quay lại với GameStore Mobile',
-          style: TextStyle(fontSize: 14, color: AppColors.textSoft),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -95,14 +101,14 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _header(),
+              _header(context),
               const SizedBox(height: 28),
               Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
-                  color: AppColors.bgSoft,
+                  color: colors.bgSoft,
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: AppColors.border),
+                  border: Border.all(color: colors.border),
                 ),
                 child: Column(
                   children: [
@@ -128,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                           _obscurePassword
                               ? Icons.visibility_off_outlined
                               : Icons.visibility_outlined,
-                          color: AppColors.textSoft,
+                          color: colors.textSoft,
                         ),
                       ),
                     ),
@@ -146,19 +152,16 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.card,
+                  color: colors.card,
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: AppColors.border),
+                  border: Border.all(color: colors.border),
                 ),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Text(
                         'Chưa có tài khoản?',
-                        style: TextStyle(
-                          color: AppColors.textSoft,
-                          fontSize: 14,
-                        ),
+                        style: TextStyle(color: colors.textSoft, fontSize: 14),
                       ),
                     ),
                     TextButton(
@@ -170,7 +173,13 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                       },
-                      child: const Text('Đăng ký ngay'),
+                      child: Text(
+                        'Đăng ký ngay',
+                        style: TextStyle(
+                          color: colors.accent,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                     ),
                   ],
                 ),

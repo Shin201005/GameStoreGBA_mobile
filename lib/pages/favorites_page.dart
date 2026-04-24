@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../models/game_model.dart';
 import '../services/game_service.dart';
 import '../services/favorite_service.dart';
@@ -71,7 +70,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       ),
                     );
 
-                    _loadFavorites(); // reload khi quay lại
+                    _loadFavorites();
                   },
                 );
               },

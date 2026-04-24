@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
+import '../theme/app_theme.dart';
 
 class AppButton extends StatelessWidget {
   final String text;
@@ -19,13 +19,15 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     final child = isLoading
-        ? const SizedBox(
+        ? SizedBox(
             width: 22,
             height: 22,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              color: Colors.white,
+              color: outlined ? colors.accent : Colors.white,
             ),
           )
         : Row(
@@ -52,12 +54,12 @@ class AppButton extends StatelessWidget {
           ? OutlinedButton(
               onPressed: isLoading ? null : onPressed,
               style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: AppColors.border),
+                side: BorderSide(color: colors.border),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
                 ),
-                backgroundColor: AppColors.card,
-                foregroundColor: AppColors.text,
+                backgroundColor: colors.card,
+                foregroundColor: colors.text,
               ),
               child: child,
             )
@@ -65,7 +67,7 @@ class AppButton extends StatelessWidget {
               onPressed: isLoading ? null : onPressed,
               style: ElevatedButton.styleFrom(
                 elevation: 0,
-                backgroundColor: AppColors.accent,
+                backgroundColor: colors.accent,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),

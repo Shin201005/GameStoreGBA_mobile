@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../models/user_model.dart';
 import '../services/auth_service.dart';
+import '../theme/app_theme.dart';
 import '../widgets/app_button.dart';
 import '../widgets/app_text_field.dart';
 
@@ -64,10 +64,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _showMessage(String msg) {
+    final colors = context.colors;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(msg),
-        backgroundColor: AppColors.card2,
+        backgroundColor: colors.card2,
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -83,6 +85,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -91,26 +95,26 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Tạo tài khoản',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w800,
-                  color: AppColors.text,
+                  color: colors.text,
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
+              Text(
                 'Tạo tài khoản local để vào app',
-                style: TextStyle(fontSize: 14, color: AppColors.textSoft),
+                style: TextStyle(fontSize: 14, color: colors.textSoft),
               ),
               const SizedBox(height: 28),
               Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
-                  color: AppColors.bgSoft,
+                  color: colors.bgSoft,
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: AppColors.border),
+                  border: Border.all(color: colors.border),
                 ),
                 child: Column(
                   children: [
@@ -142,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           _obscurePassword
                               ? Icons.visibility_off_outlined
                               : Icons.visibility_outlined,
-                          color: AppColors.textSoft,
+                          color: colors.textSoft,
                         ),
                       ),
                     ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../models/game_model.dart';
 import '../services/game_service.dart';
 import '../widgets/game_card.dart';
+import '../theme/app_theme.dart';
 import 'game_detail_page.dart';
 import 'search_page.dart';
 
@@ -18,6 +18,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
       body: FutureBuilder<List<GameModel>>(
@@ -29,11 +31,12 @@ class _HomePageState extends State<HomePage> {
           return ListView(
             padding: const EdgeInsets.all(20),
             children: [
+              // 🔥 Banner
               Container(
                 padding: const EdgeInsets.all(22),
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [AppColors.accent2, AppColors.accent],
+                  gradient: LinearGradient(
+                    colors: [colors.accent2, colors.accent],
                   ),
                   borderRadius: BorderRadius.circular(28),
                 ),
@@ -63,16 +66,21 @@ class _HomePageState extends State<HomePage> {
                       },
                       icon: const Icon(Icons.search),
                       label: const Text('Tìm game'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: colors.accent,
+                      ),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 24),
 
-              const Text(
+              // Title
+              Text(
                 'Game nổi bật',
                 style: TextStyle(
-                  color: AppColors.text,
+                  color: colors.text,
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
                 ),
@@ -90,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 14,
                     crossAxisSpacing: 14,
-                    childAspectRatio: 0.72,
+                    childAspectRatio: 0.66,
                   ),
                   itemBuilder: (context, index) {
                     final game = featuredGames[index];

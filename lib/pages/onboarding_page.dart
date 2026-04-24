@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../services/auth_service.dart';
 import '../widgets/app_button.dart';
+import '../theme/app_theme.dart';
 import 'login_page.dart';
 import 'main_page.dart';
 
@@ -22,20 +22,27 @@ class OnboardingPage extends StatelessWidget {
     );
   }
 
-  Widget _featureItem(IconData icon, String title, String subtitle) {
+  Widget _featureItem(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String subtitle,
+  ) {
+    final colors = context.colors;
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.card,
+        color: colors.card,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: colors.border),
       ),
       child: Row(
         children: [
           CircleAvatar(
             radius: 24,
-            backgroundColor: AppColors.accent.withOpacity(0.16),
-            child: Icon(icon, color: AppColors.accent),
+            backgroundColor: colors.accent.withOpacity(0.16),
+            child: Icon(icon, color: colors.accent),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -44,8 +51,8 @@ class OnboardingPage extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: AppColors.text,
+                  style: TextStyle(
+                    color: colors.text,
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
                   ),
@@ -53,10 +60,7 @@ class OnboardingPage extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   subtitle,
-                  style: const TextStyle(
-                    color: AppColors.textSoft,
-                    fontSize: 13,
-                  ),
+                  style: TextStyle(color: colors.textSoft, fontSize: 13),
                 ),
               ],
             ),
@@ -68,6 +72,8 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -76,58 +82,72 @@ class OnboardingPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Spacer(),
+
               Container(
                 width: 92,
                 height: 92,
                 decoration: BoxDecoration(
-                  color: AppColors.card,
+                  color: colors.card,
                   borderRadius: BorderRadius.circular(28),
-                  border: Border.all(color: AppColors.border),
+                  border: Border.all(color: colors.border),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.sports_esports,
                   size: 46,
-                  color: AppColors.accent,
+                  color: colors.accent,
                 ),
               ),
+
               const SizedBox(height: 28),
-              const Text(
+
+              Text(
                 'Kho game GBA trong túi của bạn',
                 style: TextStyle(
-                  color: AppColors.text,
+                  color: colors.text,
                   fontSize: 30,
                   fontWeight: FontWeight.w800,
                   height: 1.2,
                 ),
               ),
+
               const SizedBox(height: 12),
-              const Text(
+
+              Text(
                 'Đăng nhập local, lưu game yêu thích và chuẩn bị sẵn nền để chơi bằng emulator.',
                 style: TextStyle(
-                  color: AppColors.textSoft,
+                  color: colors.textSoft,
                   fontSize: 15,
                   height: 1.5,
                 ),
               ),
+
               const SizedBox(height: 28),
+
               _featureItem(
+                context,
                 Icons.login,
                 'Đăng nhập nhanh',
                 'Tạo tài khoản local, đăng nhập nhanh chóng mà không cần mạng.',
               ),
               const SizedBox(height: 12),
+
               _featureItem(
+                context,
                 Icons.favorite,
                 'Lưu game yêu thích',
                 'Lưu lại game bạn thích để dễ dàng tìm lại sau này.',
               ),
               const SizedBox(height: 12),
+
               _featureItem(
+                context,
                 Icons.gamepad,
                 'Chơi bằng Emulator',
                 'Cung cấp nền tảng để tích hợp emulator và chơi game GBA GB GBC ngay trong app.',
               ),
+
               const Spacer(),
+
               AppButton(
                 text: 'Bắt đầu ngay',
                 icon: Icons.arrow_forward,

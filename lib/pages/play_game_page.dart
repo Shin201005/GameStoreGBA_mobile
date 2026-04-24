@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import '../main.dart';
 import '../services/emulator_service.dart';
+import '../theme/app_theme.dart';
 
 class PlayGamePage extends StatefulWidget {
   final String title;
@@ -28,6 +28,7 @@ class _PlayGamePageState extends State<PlayGamePage> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageFinished: (_) {
+            if (!mounted) return;
             setState(() {
               _isLoading = false;
             });
@@ -39,13 +40,16 @@ class _PlayGamePageState extends State<PlayGamePage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Scaffold(
-      backgroundColor: AppColors.bg,
+      backgroundColor: colors.bg,
       appBar: AppBar(title: Text(widget.title)),
       body: Stack(
         children: [
           WebViewWidget(controller: _controller),
-          if (_isLoading) const Center(child: CircularProgressIndicator()),
+          if (_isLoading)
+            Center(child: CircularProgressIndicator(color: colors.accent)),
         ],
       ),
     );

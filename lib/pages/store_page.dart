@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../models/game_model.dart';
 import '../services/game_service.dart';
+import '../theme/app_theme.dart';
 import '../widgets/game_card.dart';
+import '../widgets/empty_state_widget.dart';
 import 'game_detail_page.dart';
 import 'search_page.dart';
 
@@ -18,12 +19,14 @@ class _StorePageState extends State<StorePage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Store'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(Icons.search, color: colors.text),
             onPressed: () {
               Navigator.push(
                 context,
@@ -37,14 +40,16 @@ class _StorePageState extends State<StorePage> {
         future: _gameService.getGames(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(color: colors.accent),
+            );
           }
 
           if (snapshot.hasError) {
-            return const Center(
+            return Center(
               child: Text(
                 'Lỗi tải danh sách game',
-                style: TextStyle(color: AppColors.text),
+                style: TextStyle(color: colors.text),
               ),
             );
           }
@@ -52,12 +57,7 @@ class _StorePageState extends State<StorePage> {
           final games = snapshot.data ?? [];
 
           if (games.isEmpty) {
-            return const Center(
-              child: Text(
-                'Chưa có game nào',
-                style: TextStyle(color: AppColors.textSoft),
-              ),
-            );
+            return const EmptyStateWidget(message: 'Chưa có game nào');
           }
 
           return GridView.builder(
@@ -67,7 +67,7 @@ class _StorePageState extends State<StorePage> {
               crossAxisCount: 2,
               mainAxisSpacing: 14,
               crossAxisSpacing: 14,
-              childAspectRatio: 0.72,
+              childAspectRatio: 0.66,
             ),
             itemBuilder: (context, index) {
               final game = games[index];

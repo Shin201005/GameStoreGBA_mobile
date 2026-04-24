@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../models/game_model.dart';
 import '../services/favorite_service.dart';
-import 'play_game_page.dart';
 import '../services/library_service.dart';
+import '../theme/app_theme.dart';
+import 'play_game_page.dart';
 
 class GameDetailPage extends StatefulWidget {
   final GameModel game;
@@ -16,9 +16,11 @@ class GameDetailPage extends StatefulWidget {
 
 class _GameDetailPageState extends State<GameDetailPage> {
   final FavoriteService _favoriteService = FavoriteService();
-  bool _isFavorite = false;
   final LibraryService _libraryService = LibraryService();
+
+  bool _isFavorite = false;
   bool _isInLibrary = false;
+
   @override
   void initState() {
     super.initState();
@@ -26,35 +28,35 @@ class _GameDetailPageState extends State<GameDetailPage> {
     _loadLibrary();
   }
 
-  void _loadFavorite() async {
+  Future<void> _loadFavorite() async {
     final result = await _favoriteService.isFavorite(widget.game.id);
-    setState(() {
-      _isFavorite = result;
-    });
+    if (!mounted) return;
+    setState(() => _isFavorite = result);
   }
 
-  void _toggleFavorite() async {
+  Future<void> _toggleFavorite() async {
     await _favoriteService.toggleFavorite(widget.game.id);
-    _loadFavorite();
+    await _loadFavorite();
   }
 
-  void _loadLibrary() async {
+  Future<void> _loadLibrary() async {
     final result = await _libraryService.isInLibrary(widget.game.id);
-    setState(() {
-      _isInLibrary = result;
-    });
+    if (!mounted) return;
+    setState(() => _isInLibrary = result);
   }
 
-  void _toggleLibrary() async {
+  Future<void> _toggleLibrary() async {
+    final wasInLibrary = _isInLibrary;
+
     await _libraryService.toggleLibrary(widget.game.id);
-    _loadLibrary();
+    await _loadLibrary();
 
     if (!mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          _isInLibrary ? 'Đã xóa khỏi thư viện' : 'Đã thêm vào thư viện',
+          wasInLibrary ? 'Đã xóa khỏi thư viện' : 'Đã thêm vào thư viện',
         ),
       ),
     );
@@ -62,6 +64,8 @@ class _GameDetailPageState extends State<GameDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Scaffold(
       appBar: AppBar(title: Text(widget.game.title)),
       body: SingleChildScrollView(
@@ -80,22 +84,23 @@ class _GameDetailPageState extends State<GameDetailPage> {
                   return Container(
                     width: double.infinity,
                     height: 220,
-                    color: AppColors.card2,
-                    child: const Icon(
+                    color: colors.card2,
+                    child: Icon(
                       Icons.videogame_asset,
-                      color: AppColors.accent,
+                      color: colors.accent,
                       size: 70,
                     ),
                   );
                 },
               ),
             ),
+
             const SizedBox(height: 20),
 
             Text(
               widget.game.title,
-              style: const TextStyle(
-                color: AppColors.text,
+              style: TextStyle(
+                color: colors.text,
                 fontSize: 26,
                 fontWeight: FontWeight.w800,
               ),
@@ -114,10 +119,10 @@ class _GameDetailPageState extends State<GameDetailPage> {
             ),
             const SizedBox(height: 24),
 
-            const Text(
+            Text(
               'Mô tả',
               style: TextStyle(
-                color: AppColors.text,
+                color: colors.text,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
               ),
@@ -126,8 +131,8 @@ class _GameDetailPageState extends State<GameDetailPage> {
 
             Text(
               widget.game.description,
-              style: const TextStyle(
-                color: AppColors.textSoft,
+              style: TextStyle(
+                color: colors.textSoft,
                 height: 1.5,
                 fontSize: 15,
               ),
@@ -144,6 +149,8 @@ class _GameDetailPageState extends State<GameDetailPage> {
                       builder: (_) => PlayGamePage(
                         title: widget.game.title,
                         rom: widget.game.rom,
+                        // Nếu PlayGamePage có gameId thì mở dòng dưới:
+                        // gameId: widget.game.id,
                       ),
                     ),
                   );
@@ -151,7 +158,7 @@ class _GameDetailPageState extends State<GameDetailPage> {
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Play'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.accent,
+                  backgroundColor: colors.accent,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
@@ -170,8 +177,8 @@ class _GameDetailPageState extends State<GameDetailPage> {
                     icon: Icon(_isInLibrary ? Icons.check : Icons.library_add),
                     label: Text(_isInLibrary ? 'Đã thêm' : 'Library'),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.text,
-                      side: const BorderSide(color: AppColors.border),
+                      foregroundColor: colors.text,
+                      side: BorderSide(color: colors.border),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                   ),
@@ -182,12 +189,12 @@ class _GameDetailPageState extends State<GameDetailPage> {
                     onPressed: _toggleFavorite,
                     icon: Icon(
                       _isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: _isFavorite ? Colors.red : null,
+                      color: _isFavorite ? Colors.red : colors.text,
                     ),
                     label: Text(_isFavorite ? 'Đã thích' : 'Favorite'),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.text,
-                      side: const BorderSide(color: AppColors.border),
+                      foregroundColor: colors.text,
+                      side: BorderSide(color: colors.border),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                   ),
@@ -209,18 +216,20 @@ class _InfoChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: AppColors.card,
+        color: colors.card,
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: colors.border),
       ),
       child: Row(
         children: [
-          Icon(icon, size: 16, color: AppColors.accent),
+          Icon(icon, size: 16, color: colors.accent),
           const SizedBox(width: 6),
-          Text(text, style: const TextStyle(color: AppColors.textSoft)),
+          Text(text, style: TextStyle(color: colors.textSoft)),
         ],
       ),
     );
