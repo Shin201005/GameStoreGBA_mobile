@@ -3,6 +3,7 @@ import '../main.dart';
 import '../models/game_model.dart';
 import '../services/game_service.dart';
 import '../widgets/game_card.dart';
+import 'game_detail_page.dart';
 
 class StorePage extends StatefulWidget {
   const StorePage({super.key});
@@ -60,7 +61,12 @@ class _StorePageState extends State<StorePage> {
               return GameCard(
                 game: game,
                 onTap: () {
-                  // Bước sau sẽ mở GameDetailPage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => GameDetailPage(game: game),
+                    ),
+                  );
                 },
               );
             },
