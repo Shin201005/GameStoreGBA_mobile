@@ -4,6 +4,7 @@ import '../models/game_model.dart';
 import '../services/game_service.dart';
 import '../widgets/game_card.dart';
 import 'game_detail_page.dart';
+import 'search_page.dart';
 
 class StorePage extends StatefulWidget {
   const StorePage({super.key});
@@ -18,7 +19,20 @@ class _StorePageState extends State<StorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Store')),
+      appBar: AppBar(
+        title: const Text('Store'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SearchPage()),
+              );
+            },
+          ),
+        ],
+      ),
       body: FutureBuilder<List<GameModel>>(
         future: _gameService.getGames(),
         builder: (context, snapshot) {
