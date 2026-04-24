@@ -35,7 +35,12 @@ class SettingsPage extends StatelessWidget {
       ),
       child: ListTile(
         onTap: onTap,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14, //tăng chiều cao
+        ),
         leading: CircleAvatar(
+          radius: 24, //icon to hơn
           backgroundColor: iconColor.withOpacity(0.15),
           child: Icon(icon, color: iconColor),
         ),
@@ -44,11 +49,16 @@ class SettingsPage extends StatelessWidget {
           style: const TextStyle(
             color: AppColors.text,
             fontWeight: FontWeight.w700,
+            fontSize: 16, //chữ to hơn chút
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: const TextStyle(color: AppColors.textSoft),
+          style: const TextStyle(
+            color: AppColors.textSoft,
+            fontSize: 13,
+            height: 1.3, // giãn dòng
+          ),
         ),
         trailing: const Icon(Icons.chevron_right, color: AppColors.textSoft),
       ),
@@ -65,8 +75,30 @@ class SettingsPage extends StatelessWidget {
           _tile(
             icon: Icons.info_outline,
             title: 'Thông tin app',
-            subtitle: 'Phiên bản demo Tuần 1',
+            subtitle: 'App chơi game GBA miễn phí',
           ),
+          _tile(
+            icon: Icons.storage,
+            title: 'Dữ liệu local',
+            subtitle:
+                'Tài khoản, thư viện và yêu thích được lưu bằng SharedPreferences',
+          ),
+          _tile(
+            icon: Icons.notifications,
+            title: 'Thông báo',
+            subtitle: 'Bật/tắt thông báo trong app',
+          ),
+          _tile(
+            icon: Icons.dark_mode,
+            title: 'Giao diện',
+            subtitle: 'Chế độ tối (Dark mode)',
+          ),
+          _tile(
+            icon: Icons.info,
+            title: 'Về chúng tôi',
+            subtitle: 'Nhóm Pinky',
+          ),
+          _tile(icon: Icons.verified, title: 'Phiên bản', subtitle: 'v1.0.0'),
           _tile(
             icon: Icons.logout,
             title: 'Đăng xuất',
