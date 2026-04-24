@@ -3,6 +3,7 @@ import '../main.dart';
 import '../models/game_model.dart';
 import '../services/favorite_service.dart';
 import 'play_game_page.dart';
+import '../services/library_service.dart';
 
 class GameDetailPage extends StatefulWidget {
   final GameModel game;
@@ -16,11 +17,13 @@ class GameDetailPage extends StatefulWidget {
 class _GameDetailPageState extends State<GameDetailPage> {
   final FavoriteService _favoriteService = FavoriteService();
   bool _isFavorite = false;
-
+  final LibraryService _libraryService = LibraryService();
+  bool _isInLibrary = false;
   @override
   void initState() {
     super.initState();
     _loadFavorite();
+    _loadLibrary();
   }
 
   void _loadFavorite() async {
@@ -33,6 +36,24 @@ class _GameDetailPageState extends State<GameDetailPage> {
   void _toggleFavorite() async {
     await _favoriteService.toggleFavorite(widget.game.id);
     _loadFavorite();
+  }
+
+  void _loadLibrary() async {
+    final result = await _libraryService.isInLibrary(widget.game.id);
+    setState(() {
+      _isInLibrary = result;
+    });
+  }
+
+  void _addToLibrary() async {
+    await _libraryService.addToLibrary(widget.game.id);
+    _loadLibrary();
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Đã thêm vào thư viện')));
   }
 
   @override
@@ -141,9 +162,9 @@ class _GameDetailPageState extends State<GameDetailPage> {
               children: [
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.library_add),
-                    label: const Text('Library'),
+                    onPressed: _isInLibrary ? null : _addToLibrary,
+                    icon: Icon(_isInLibrary ? Icons.check : Icons.library_add),
+                    label: Text(_isInLibrary ? 'Đã thêm' : 'Library'),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: AppColors.text,
                       side: const BorderSide(color: AppColors.border),
