@@ -1,44 +1,81 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
+import '../models/game_model.dart';
+import '../services/game_service.dart';
+import '../services/favorite_service.dart';
+import '../widgets/game_card.dart';
+import '../widgets/empty_state_widget.dart';
+import 'game_detail_page.dart';
 
-class FavoritesPage extends StatelessWidget {
+class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
+
+  @override
+  State<FavoritesPage> createState() => _FavoritesPageState();
+}
+
+class _FavoritesPageState extends State<FavoritesPage> {
+  final GameService _gameService = GameService();
+  final FavoriteService _favoriteService = FavoriteService();
+
+  List<GameModel> _favoriteGames = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorites();
+  }
+
+  Future<void> _loadFavorites() async {
+    final allGames = await _gameService.getGames();
+    final favoriteIds = await _favoriteService.getFavorites();
+
+    final favorites = allGames
+        .where((game) => favoriteIds.contains(game.id))
+        .toList();
+
+    setState(() {
+      _favoriteGames = favorites;
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Favorites')),
-      body: Center(
-        child: Container(
-          margin: const EdgeInsets.all(20),
-          padding: const EdgeInsets.all(22),
-          decoration: BoxDecoration(
-            color: AppColors.card,
-            borderRadius: BorderRadius.circular(22),
-            border: Border.all(color: AppColors.border),
-          ),
-          child: const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.favorite, size: 42, color: AppColors.accent),
-              SizedBox(height: 12),
-              Text(
-                'Favorites Page',
-                style: TextStyle(
-                  color: AppColors.text,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _favoriteGames.isEmpty
+          ? const EmptyStateWidget(message: 'Chưa có game yêu thích')
+          : GridView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: _favoriteGames.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 14,
+                crossAxisSpacing: 14,
+                childAspectRatio: 0.72,
               ),
-              SizedBox(height: 8),
-              Text(
-                'Sẽ làm ở Tuần 3',
-                style: TextStyle(color: AppColors.textSoft),
-              ),
-            ],
-          ),
-        ),
-      ),
+              itemBuilder: (context, index) {
+                final game = _favoriteGames[index];
+
+                return GameCard(
+                  game: game,
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => GameDetailPage(game: game),
+                      ),
+                    );
+
+                    _loadFavorites(); // reload khi quay lại
+                  },
+                );
+              },
+            ),
     );
   }
 }

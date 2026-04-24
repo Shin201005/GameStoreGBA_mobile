@@ -1,17 +1,44 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
 import '../models/game_model.dart';
+import '../services/favorite_service.dart';
 import 'play_game_page.dart';
 
-class GameDetailPage extends StatelessWidget {
+class GameDetailPage extends StatefulWidget {
   final GameModel game;
 
   const GameDetailPage({super.key, required this.game});
 
   @override
+  State<GameDetailPage> createState() => _GameDetailPageState();
+}
+
+class _GameDetailPageState extends State<GameDetailPage> {
+  final FavoriteService _favoriteService = FavoriteService();
+  bool _isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorite();
+  }
+
+  void _loadFavorite() async {
+    final result = await _favoriteService.isFavorite(widget.game.id);
+    setState(() {
+      _isFavorite = result;
+    });
+  }
+
+  void _toggleFavorite() async {
+    await _favoriteService.toggleFavorite(widget.game.id);
+    _loadFavorite();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(game.title)),
+      appBar: AppBar(title: Text(widget.game.title)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -20,7 +47,7 @@ class GameDetailPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(22),
               child: Image.asset(
-                game.cover,
+                widget.game.cover,
                 width: double.infinity,
                 height: 220,
                 fit: BoxFit.cover,
@@ -41,7 +68,7 @@ class GameDetailPage extends StatelessWidget {
             const SizedBox(height: 20),
 
             Text(
-              game.title,
+              widget.game.title,
               style: const TextStyle(
                 color: AppColors.text,
                 fontSize: 26,
@@ -52,9 +79,12 @@ class GameDetailPage extends StatelessWidget {
 
             Row(
               children: [
-                _InfoChip(text: game.category, icon: Icons.category),
+                _InfoChip(text: widget.game.category, icon: Icons.category),
                 const SizedBox(width: 10),
-                _InfoChip(text: game.rating.toString(), icon: Icons.star),
+                _InfoChip(
+                  text: widget.game.rating.toString(),
+                  icon: Icons.star,
+                ),
               ],
             ),
             const SizedBox(height: 24),
@@ -70,7 +100,7 @@ class GameDetailPage extends StatelessWidget {
             const SizedBox(height: 10),
 
             Text(
-              game.description,
+              widget.game.description,
               style: const TextStyle(
                 color: AppColors.textSoft,
                 height: 1.5,
@@ -86,8 +116,10 @@ class GameDetailPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) =>
-                          PlayGamePage(title: game.title, rom: game.rom),
+                      builder: (_) => PlayGamePage(
+                        title: widget.game.title,
+                        rom: widget.game.rom,
+                      ),
                     ),
                   );
                 },
@@ -122,9 +154,12 @@ class GameDetailPage extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.favorite_border),
-                    label: const Text('Favorite'),
+                    onPressed: _toggleFavorite,
+                    icon: Icon(
+                      _isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: _isFavorite ? Colors.red : null,
+                    ),
+                    label: Text(_isFavorite ? 'Đã thích' : 'Favorite'),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: AppColors.text,
                       side: const BorderSide(color: AppColors.border),
