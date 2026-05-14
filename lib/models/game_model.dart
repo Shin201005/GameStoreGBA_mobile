@@ -6,6 +6,7 @@ class GameModel {
   final String cover;
   final String description;
   final double rating;
+  final String status;
 
   GameModel({
     required this.id,
@@ -15,6 +16,7 @@ class GameModel {
     required this.cover,
     required this.description,
     required this.rating,
+    this.status = 'approved',
   });
 
   factory GameModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,19 @@ class GameModel {
       cover: json['cover'],
       description: json['description'],
       rating: (json['rating'] as num).toDouble(),
+      status: json['status'] ?? 'approved',
+    );
+  }
+  GameModel copyWith({String? status}) {
+    return GameModel(
+      id: id,
+      title: title,
+      rom: rom,
+      category: category,
+      cover: cover,
+      description: description,
+      rating: rating,
+      status: status ?? this.status,
     );
   }
 }

@@ -3,6 +3,9 @@ import '../main.dart';
 import '../services/auth_service.dart';
 import '../theme/app_theme.dart';
 import 'login_page.dart';
+import 'app_info_page.dart';
+import 'notification_page.dart';
+import 'about_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -126,19 +129,25 @@ class SettingsPage extends StatelessWidget {
             icon: Icons.info_outline,
             title: 'Thông tin app',
             subtitle: 'App chơi game GBA miễn phí',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const AppInfoPage()),
+              );
+            },
           ),
-          _tile(
-            context: context,
-            icon: Icons.storage,
-            title: 'Dữ liệu local',
-            subtitle:
-                'Tài khoản, thư viện và yêu thích được lưu bằng SharedPreferences',
-          ),
+
           _tile(
             context: context,
             icon: Icons.notifications,
             title: 'Thông báo',
             subtitle: 'Bật/tắt thông báo trong app',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const NotificationPage()),
+              );
+            },
           ),
           _tile(
             context: context,
@@ -152,6 +161,19 @@ class SettingsPage extends StatelessWidget {
             icon: Icons.info,
             title: 'Về chúng tôi',
             subtitle: 'Nhóm Pinky',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const AboutPage()),
+              );
+            },
+          ),
+          _tile(
+            context: context,
+            icon: Icons.storage,
+            title: 'Dữ liệu local',
+            subtitle:
+                'Tài khoản, thư viện và yêu thích được lưu bằng SharedPreferences',
           ),
           _tile(
             context: context,

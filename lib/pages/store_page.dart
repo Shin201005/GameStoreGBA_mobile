@@ -67,7 +67,7 @@ class _StorePageState extends State<StorePage> {
               crossAxisCount: 2,
               mainAxisSpacing: 14,
               crossAxisSpacing: 14,
-              childAspectRatio: 0.66,
+              childAspectRatio: 0.68,
             ),
             itemBuilder: (context, index) {
               final game = games[index];

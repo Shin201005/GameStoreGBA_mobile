@@ -55,7 +55,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
-                childAspectRatio: 0.72,
+                childAspectRatio: 0.68,
               ),
               itemBuilder: (context, index) {
                 final game = _favoriteGames[index];

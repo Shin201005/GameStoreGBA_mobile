@@ -3,27 +3,121 @@
     "id": 1,
     "title": "Pokemon Leaf Green",
     "rom": "PokemonLG.gba",
-    "category": "GBA",
+    "category": "Pokemon",
     "cover": "assets/covers/pokemon_fire_red.png",
     "description": "Game nhập vai Pokemon kinh điển trên hệ máy GBA.",
-    "rating": 4.8
+    "rating": 4.8,
+    "status": "approved"
   },
   {
     "id": 2,
     "title": "Pokemon Emerald",
     "rom": "pokemon_emerald.gba",
-    "category": "GBA",
-    "cover": "assets/covers/pokemon_emerald.png",
+    "category": "Pokemon",
+    "cover": "assets/covers/pokemon_emerald.jpg",
     "description": "Phiên bản Pokemon nổi tiếng với vùng đất Hoenn.",
-    "rating": 4.7
+    "rating": 4.7,
+    "status": "approved"
   },
   {
     "id": 3,
     "title": "Dragon Ball Legacy of Goku",
-    "rom": "dragon_ball.gba",
+    "rom": "2Gamesin1-Dragon Ball Z-The Legacy of Goku I & II (USA).gba",
     "category": "Action",
-    "cover": "assets/covers/dragon_ball.png",
+    "cover": "assets/covers/dragon_ball.jpg",
     "description": "Game hành động phiêu lưu theo Dragon Ball.",
-    "rating": 4.5
-  }
+    "rating": 4.5,
+    "status": "approved"
+  },
+  {
+  "id": 4,
+  "title": "Super Mario Advance 4",
+  "rom": "1190 - Super Mario Advance 4 - Super Mario Bros. 3.gba",
+  "category": "Platformer",
+  "cover": "assets/covers/super_mario_advance4.jpg",
+  "description": "Mario phiêu lưu giải cứu công chúa trong Super Mario Bros. 3.",
+  "rating": 4.8,
+  "status": "approved"
+},
+{
+  "id": 5,
+  "title": "Super Mario Advance 2",
+  "rom": "Super Mario Advance 2 - Super Mario World.gba",
+  "category": "Platformer",
+  "cover": "assets/covers/super_mario_advance2.jpg",
+  "description": "Phiên bản GBA của Super Mario World với gameplay kinh điển.",
+  "rating": 4.7,
+  "status": "approved"
+},
+{
+  "id": 6,
+  "title": "Resident Evil GB",
+  "rom": "Resident Evil GB.gb",
+  "category": "Horror",
+  "cover": "assets/covers/resident_evil_gb.png",
+  "description": "Bản Resident Evil fan-made phong cách Game Boy.",
+  "rating": 4.1,
+  "status": "approved"
+},
+{
+  "id": 7,
+  "title": "Hatsune Miku Bomb Squad",
+  "rom": "Hatsune_Miku_Bomb_Squad_v1-3.gbc",
+  "category": "Puzzle",
+  "cover": "assets/covers/hatsune_miku_bomb_squad.png",
+  "description": "Game puzzle phong cách retro với Hatsune Miku.",
+  "rating": 4.0,
+  "status": "approved"
+},
+{
+  "id": 8,
+  "title": "Grand Theft Auto Advance",
+  "rom": "Grand Theft Auto Advance.gba",
+  "category": "Action",
+  "cover": "assets/covers/gta_advance.jpg",
+  "description": "Phiên bản GTA trên GBA với thế giới mở góc nhìn từ trên xuống.",
+  "rating": 4.3,
+  "status": "approved"
+},
+{
+  "id": 9,
+  "title": "Kirby & the Amazing Mirror",
+  "rom": "Kirby & the Amazing Mirror.gba",
+  "category": "Platformer",
+  "cover": "assets/covers/kirby_amazing_mirror.jpg",
+  "description": "Kirby phiêu lưu trong mê cung gương đầy màu sắc.",
+  "rating": 4.9,
+  "status": "approved"
+},
+{
+  "id": 10,
+  "title": "Yu-Gi-Oh! World Championship Tournament",
+  "rom": "Yu-Gi-Oh! - World Championship Tournament 2004.gba",
+  "category": "Card Game",
+  "cover": "assets/covers/yugioh_wct.jpg",
+  "description": "Game đấu bài Yu-Gi-Oh! trên GBA với nhiều deck và duel.",
+  "rating": 4.6,
+  "status": "approved"
+},
+{
+  "id": 11,
+  "title": "Kirby Nightmare in Dream Land",
+  "rom": "Kirby_Nightmare in Dream Land.gba",
+  "category": "Platformer",
+  "cover": "assets/covers/kirby_nightmare.jpg",
+  "description": "Kirby chiến đấu chống Nightmare trong Dream Land.",
+  "rating": 4.8,
+  "status": "approved"
+},
+{
+  "id": 12,
+  "title": "Guilty Gear X Advance Edition",
+  "rom": "Guilty Gear X - Advance Edition (USA).gba",
+  "category": "Fighting",
+  "cover": "assets/covers/guilty_gear_x.jpg",
+  "description": "Game đối kháng anime tốc độ cao trên Game Boy Advance.",
+  "rating": 4.4,
+  "status": "approved"
+}
+
 ]
