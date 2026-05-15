@@ -3,7 +3,7 @@ import '../theme/app_theme.dart';
 
 class AdminBottomNavBar extends StatelessWidget {
   final int currentIndex;
-  final Function(int) onTap;
+  final ValueChanged<int> onTap;
 
   const AdminBottomNavBar({
     super.key,
@@ -16,33 +16,62 @@ class AdminBottomNavBar extends StatelessWidget {
     final colors = context.colors;
 
     return Container(
+      margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
       decoration: BoxDecoration(
-        color: colors.bgSoft,
-        border: Border(top: BorderSide(color: colors.border)),
+        color: colors.card,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: colors.border),
       ),
-      child: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: onTap,
-        type: BottomNavigationBarType.fixed,
-        elevation: 0,
-        backgroundColor: colors.bgSoft,
-        selectedItemColor: colors.accent,
-        unselectedItemColor: colors.textSoft,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
+      child: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          backgroundColor: Colors.transparent,
+          indicatorColor: colors.accent.withOpacity(0.18),
+          labelTextStyle: WidgetStateProperty.resolveWith((states) {
+            final selected = states.contains(WidgetState.selected);
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.sports_esports),
-            label: 'Games',
-          ),
+            return TextStyle(
+              color: selected ? colors.accent : colors.textSoft,
+              fontSize: 12,
+              fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+            );
+          }),
+          iconTheme: WidgetStateProperty.resolveWith((states) {
+            final selected = states.contains(WidgetState.selected);
 
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Users'),
-
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Stats'),
-        ],
+            return IconThemeData(
+              color: selected ? colors.accent : colors.textSoft,
+            );
+          }),
+        ),
+        child: NavigationBar(
+          height: 72,
+          backgroundColor: Colors.transparent,
+          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+          selectedIndex: currentIndex,
+          onDestinationSelected: onTap,
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.dashboard_outlined),
+              selectedIcon: Icon(Icons.dashboard),
+              label: 'Dashboard',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.sports_esports_outlined),
+              selectedIcon: Icon(Icons.sports_esports),
+              label: 'Games',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.people_outline),
+              selectedIcon: Icon(Icons.people),
+              label: 'Users',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.bar_chart_outlined),
+              selectedIcon: Icon(Icons.bar_chart),
+              label: 'Stats',
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -56,21 +56,29 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() => _isLoading = false);
 
     if (success) {
-      _showMessage('Đăng ký thành công, hãy đăng nhập');
+      _showMessage('Đăng ký thành công, hãy đăng nhập', isSuccess: true);
       Navigator.pop(context);
     } else {
       _showMessage('Email đã tồn tại');
     }
   }
 
-  void _showMessage(String msg) {
-    final colors = context.colors;
-
+  void _showMessage(String msg, {bool isSuccess = false}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(msg),
-        backgroundColor: colors.card2,
+        content: Text(
+          msg,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+
+        backgroundColor: isSuccess ? Colors.green : Colors.redAccent,
+
         behavior: SnackBarBehavior.floating,
+
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
     );
   }
