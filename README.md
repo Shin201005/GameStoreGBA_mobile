@@ -1,4 +1,44 @@
-Nhóm 5: Đề tài Xây dựng ứng dụng chơi game cổ điển(GBA, GB, GBC) 
+Nhóm 5:
+
+# Tên đề tài:  Đề tài Xây dựng ứng dụng chơi game cổ điển GBA, GB, GBC
+
+# Giới thiệu app:
+
+Ứng dụng chơi game cổ điển GBA, GB, GBC là ứng dụng di động được phát triển bằng Flutter nhằm xây dựng nền tảng quản lý và chơi game GBA, GB, GBC trực tiếp trên điện thoại.
+
+Ứng dụng cho phép người dùng:
+- Đăng nhập tài khoản
+- Xem danh sách game
+- Xem thông tin chi tiết game
+- Chơi game trực tiếp bằng EmulatorJS
+- Điều hướng giao diện hiện đại theo phong cách dark mode light mode pink mode
+
+Hệ thống sử dụng WebView Flutter để tích hợp EmulatorJS giúp chạy game trực tiếp bên trong ứng dụng.
+
+
+
+# Công nghệ sử dụng:
+
+- Flutter
+- Dart
+- SharedPreferences
+- WebView Flutter
+- EmulatorJS
+- XAMPP Server
+
+
+
+# Chức năng chính
+
+- Đăng ký / Đăng nhập
+- Hiển thị danh sách game
+- Xem chi tiết game
+- Chơi game trực tiếp
+- Giao diện dark mode
+- Bottom Navigation Bar
+- Lưu trạng thái đăng nhập bằng SharedPreferences
+
+# Thành viên:
 
 Hà Vĩnh Phúc - 23810310358 (github Shin201005)
 
@@ -6,7 +46,116 @@ Trần Gia Hồng - 23810310336 (github pink-vip1)
 
 Nguyễn Tấn Dũng - 23810310440 (github dungtan193-cmd)
 
-Hướng dẫn chạy:
+## Phân công nhiệm vụ cụ thể
+
+### Hà Vĩnh Phúc: 
+- Cài đặt WebView Flutter
+- Xử lý danh sách game mẫu trong ứng dụng, tạo model dữ liệu game
+- Xây dựng giao diện chơi game, chi tiết game, thư viện, yêu thích, admin games, admin tolal game
+- Lưu trạng thái khi add favorite , add library, khi thay đổi trạng thái game và user bằng SharedPreferences
+- Tích hợp EmulatorJS vào ứng dụng
+- Cấu hình đường dẫn ROM game bằng XAMPP Server
+- Kiểm thử chức năng Play Game
+- Kiểm tra lỗi giao diện và chức năng trên Android Emulator
+### Trần Gia Hồng: 
+- Tạo model dữ liệu user
+- Thiết kế AuthService
+- Xử lý chức năng đăng nhập, đăng ký
+- Xử lý chia luồng Admin và user
+- Xây dựng giao diện đăng nhập, đăng ký, trang tìm kiếm, trang chủ(home), trang store
+- Lưu trạng thái đăng nhập bằng SharedPreferences
+- Xử lý tìm kiếm và phân loại game
+- Điều hướng giữa các màn hình
+### Nguyễn Tấn Dũng:
+- Thiết kế layout cơ bản cho các Screen
+- Thiết kế widgets app button, app text field, game card, loading widget, empty state widget
+- Xây dựng giao diện trang splash, onboarding, setting, profile, about, thông báo, admin user, admin stats
+- Thiết kế theme service
+- Tạo giao diện dark mode light mode pink mode thống nhất cho toàn bộ ứng dụng
+- Xây dựng Bottom Navigation Bar
+
+  
+# Công nghệ sử dụng
+
+## Flutter
+Flutter là framework phát triển ứng dụng đa nền tảng do Google phát triển. Trong đề tài này, Flutter được sử dụng để xây dựng giao diện ứng dụng GameStore Mobile trên Android với khả năng thiết kế UI hiện đại, hiệu năng cao và dễ dàng mở rộng chức năng.
+
+Flutter hỗ trợ cơ chế widget giúp xây dựng giao diện theo dạng component, từ đó dễ dàng tái sử dụng và quản lý source code.
+
+
+
+## Dart
+Dart là ngôn ngữ lập trình chính được sử dụng trong Flutter. Dart hỗ trợ lập trình hướng đối tượng, cú pháp dễ hiểu và tối ưu cho việc phát triển ứng dụng mobile.
+
+Toàn bộ logic xử lý dữ liệu, điều hướng màn hình và chức năng của ứng dụng được xây dựng bằng Dart.
+
+
+
+## SharedPreferences
+SharedPreferences là thư viện dùng để lưu dữ liệu cục bộ trên thiết bị Android.
+
+Trong đề tài này, SharedPreferences được sử dụng để:
+- Lưu trạng thái đăng nhập
+- Lưu dữ liệu người dùng
+- Lưu trạng thái game và trạng thái user của Admin
+- Duy trì dữ liệu sau khi tắt ứng dụng
+
+
+
+## WebView Flutter
+WebView Flutter là thư viện cho phép hiển thị nội dung web trực tiếp bên trong ứng dụng Flutter.
+
+Hệ thống sử dụng WebView để:
+- Mở EmulatorJS
+- Hiển thị giao diện giả lập game
+- Chạy game GBA trực tiếp trong ứng dụng
+
+
+
+## EmulatorJS
+EmulatorJS là trình giả lập game chạy trên nền web bằng JavaScript.
+
+Trong đề tài này, EmulatorJS được sử dụng để giả lập và chơi các game GBA trực tiếp trên điện thoại mà không cần cài thêm ứng dụng giả lập riêng.
+
+EmulatorJS hỗ trợ:
+- Điều khiển cảm ứng
+- Chạy ROM game GBA
+- Tích hợp qua WebView
+
+
+
+## XAMPP Server
+XAMPP là phần mềm tạo môi trường máy chủ cục bộ.
+
+Trong đề tài, XAMPP được sử dụng để:
+- Host file ROM game
+- Chạy EmulatorJS local
+- Cung cấp đường dẫn truy cập game cho ứng dụng Flutter
+
+
+
+## Android Studio
+Android Studio là môi trường phát triển chính được sử dụng để lập trình, build và chạy ứng dụng Flutter.
+
+Android Studio hỗ trợ:
+- Android Emulator
+- Debug ứng dụng
+- Quản lý SDK Android
+- Theo dõi log và lỗi hệ thống
+
+
+
+## Visual Studio Code
+Visual Studio Code được sử dụng để viết source code Flutter và quản lý project.
+
+VS Code hỗ trợ:
+- Highlight code
+- Quản lý extension Flutter/Dart
+- Terminal tích hợp
+- Git và quản lý source code
+
+
+# Hướng dẫn cài đặt
 
 có thể xem video hướng dẫn trong link drive sau khi tải và cài đặt flutter xampp: https://drive.google.com/drive/folders/1KuQj3k4Sp_vVtC0-hmJg0qkmL9wbdbly?usp=drive_link
 
@@ -22,9 +171,11 @@ Bước 5 : cho tất cả các file giải nén của emulator vào thư mục 
 
 Bước 6 : clone project về
 
-Bước 7 : vào app xampp vừa tải ấn start ở Apache
+# Hướng dẫn chạy project
 
-Bước 8 : cd vào thư mục vừa clone chạy flutter pub get sau đó chạy flutter run
+Bước 1 : vào app xampp vừa tải ấn start ở Apache
+
+Bước 2 : cd vào thư mục vừa clone chạy flutter pub get sau đó chạy flutter run
 
 Layout: https://drive.google.com/drive/folders/1YRFHXkY9KH-94cHCa9r4xXDw5IlQ4L97       https://drive.google.com/drive/folders/1gWfRaIT6CLuxTWPecqp8aqWmMWIupp1Q
 
