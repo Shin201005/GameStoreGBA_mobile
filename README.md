@@ -8,7 +8,7 @@ Nguyễn Tấn Dũng - 23810310440 (github dungtan193-cmd)
 
 Hướng dẫn chạy:
 
-có thể xem video hướng dẫn trong thư mục videos sau khi tải và cài đặt flutter xampp.
+có thể xem video hướng dẫn trong link drive sau khi tải và cài đặt flutter xampp: https://drive.google.com/drive/folders/1KuQj3k4Sp_vVtC0-hmJg0qkmL9wbdbly?usp=drive_link
 
 Bước 1: tải flutter theo hướng dẫn : https://docs.flutter.dev/install/quick
 
@@ -16,7 +16,7 @@ Bước 2: tải xampp theo đường dẫn và cài đặt : https://www.apache
 
 Bước 3: tải emulator máy ảo trong đường dẫn( tải bản 4.2.3.7z nếu có bản mới hơn thì chọn bản mới nhất) : https://github.com/EmulatorJS/EmulatorJS/releases
 
-Bước 4: giải nén đổi tên thư mục thành gba và thay file index trong mã nguồn máy ảo emulator bằng bản trong :
+Bước 4: giải nén đổi tên thư mục thành gba và thay file index trong mã nguồn máy ảo emulator bằng bản trong thư mục index
 
 Bước 5 : cho tất cả các file giải nén của emulator vào thư mục xampp\htdocs của xampp
 
