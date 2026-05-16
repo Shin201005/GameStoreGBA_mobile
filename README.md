@@ -153,7 +153,9 @@ VS Code hỗ trợ:
 - Quản lý extension Flutter/Dart
 - Terminal tích hợp
 - Git và quản lý source code
-
+- 
+# Link video demo
+https://drive.google.com/drive/folders/1KuQj3k4Sp_vVtC0-hmJg0qkmL9wbdbly?usp=drive_link
 
 # Hướng dẫn cài đặt
 
