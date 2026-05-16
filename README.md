@@ -26,6 +26,8 @@ Bước 7 : vào app xampp vừa tải ấn start ở Apache
 
 Bước 8 : cd vào thư mục vừa clone chạy flutter pub get sau đó chạy flutter run
 
+Layout: https://drive.google.com/drive/folders/1YRFHXkY9KH-94cHCa9r4xXDw5IlQ4L97       https://drive.google.com/drive/folders/1gWfRaIT6CLuxTWPecqp8aqWmMWIupp1Q
+
 Ảnh giao diện:
 
 <img width="413" height="948" alt="Screenshot 2026-05-07 091849" src="https://github.com/user-attachments/assets/1088e510-c234-429a-bdd1-88024194a90f" />
